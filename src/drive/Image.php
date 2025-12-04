@@ -240,7 +240,23 @@ class Image implements CaptchaDrive
      */
     protected function getFont(): string
     {
-        return dirname(__DIR__) . '/ttf/en.ttf';
+        $font = dirname(__DIR__) . '/ttf/en.ttf';
+        if (!\class_exists(\Phar::class, false) || !\Phar::running()) {
+            return $font;
+        }
+        $tmpPath = sys_get_temp_dir() ?: '/tmp';
+        if (defined('RUNTIME_PATH')) {
+            $tmpPath = RUNTIME_PATH . DIRECTORY_SEPARATOR . 'tmp' . DIRECTORY_SEPARATOR . 'font';
+            if (!is_dir($tmpPath)) {
+                mkdir($tmpPath, 0777, true);
+            }
+        }
+        $filePath = "$tmpPath/en.ttf";
+        clearstatcache();
+        if (!is_file($filePath)) {
+            file_put_contents($filePath, file_get_contents($font));
+        }
+        return $filePath;
     }
 
     /**

@@ -1,11 +1,7 @@
 {
     "name": "mongdch/mon-captcha",
     "description": "The PHP Captcha Library",
-    "keywords": [
-        "PHP",
-        "mon",
-        "captcha"
-    ],
+    "keywords": ["captcha"],
     "homepage": "http://gdmon.com/",
     "license": "MIT",
     "authors": [
