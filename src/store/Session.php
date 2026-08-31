@@ -58,7 +58,8 @@ class Session implements CaptchaStore
     /**
      * 加密验证码
      *
-     * @param string $str 验证码信息
+     * @param string $app   验证码所属应用
+     * @param string $id    验证码ID
      * @return string
      */
     protected function encode(string $app, string $id): string

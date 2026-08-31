@@ -127,11 +127,6 @@ class Drag implements CaptchaDrive
         ob_start();
         imagepng($this->im);
         $img = ob_get_clean();
-        // 清空图片资源
-        imagedestroy($this->im);
-        imagedestroy($this->im_fullbg);
-        imagedestroy($this->im_bg);
-        imagedestroy($this->im_slide);
 
         // 横向拖动，用 x 作为验证值
         $code = $this->_x;
@@ -195,8 +190,6 @@ class Drag implements CaptchaDrive
         imagefill($img, 0, 0, $color);
         // 裁剪
         imagecopyresampled($img, $this->im_fullbg, 0, 0, 0, 0, $this->config['bg_width'], $this->config['bg_height'], $info[0], $info[1]);
-        // 销毁原图
-        imagedestroy($this->im_fullbg);
         // 设置新图像
         $this->im_fullbg = $img;
         // 按配置大小截取图片
@@ -236,15 +229,12 @@ class Drag implements CaptchaDrive
         imagefill($img, 0, 0, $color);
         // 裁剪
         imagecopyresampled($img, $img_mark, 0, 0, 0, 0, $this->config['mark_width'], $this->config['mark_height'], $info[0], $info[1]);
-        // 销毁原图
-        imagedestroy($img_mark);
         // 设置新图像
         $img_mark = $img;
 
         imagecopy($this->im_slide, $this->im_fullbg, 0, $this->_y, $this->_x, $this->_y, $this->config['mark_width'], $this->config['mark_height']);
         imagecopy($this->im_slide, $img_mark, 0, $this->_y, 0, 0, $this->config['mark_width'], $this->config['mark_height']);
         imagecolortransparent($this->im_slide, 0);
-        imagedestroy($img_mark);
     }
 
     /**
@@ -271,14 +261,11 @@ class Drag implements CaptchaDrive
         imagefill($img, 0, 0, $color);
         // 裁剪
         imagecopyresampled($img, $im, 0, 0, 0, 0, $this->config['mark_width'], $this->config['mark_height'], $info[0], $info[1]);
-        // 销毁原图
-        imagedestroy($im);
         // 设置新图像
         $im = $img;
 
         imagecolortransparent($im, 0);
         imagecopy($this->im_bg, $im, $this->_x, $this->_y, 0, 0, $this->config['mark_width'], $this->config['mark_height']);
-        imagedestroy($im);
     }
 
     /**

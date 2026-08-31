@@ -16,7 +16,7 @@ interface CaptchaDrive
      * 设置配置信息
      *
      * @param array $config
-     * @return CaptchaDrive;
+     * @return CaptchaDrive
      */
     public function setConfig(array $config): CaptchaDrive;
 

@@ -200,7 +200,6 @@ class Image implements CaptchaDrive
         ob_start();
         imagepng($this->_img);
         $img = ob_get_clean();
-        imagedestroy($this->_img);
         // 验证码
         $captcha = implode('', $code);
 

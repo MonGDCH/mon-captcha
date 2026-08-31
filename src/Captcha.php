@@ -86,7 +86,7 @@ class Captcha
      * @param mixed $default 默认值
      * @return mixed
      */
-    public function getConfig(string $key = null, $default = null)
+    public function getConfig(?string $key = null, $default = null)
     {
         if (is_null($key)) {
             return $this->config;
